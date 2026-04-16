@@ -1,0 +1,182 @@
+/* TaskShelf - Library-themed Task Manager Styles */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for the library theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1510;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3d3224 0%, #2d2418 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4a3d2e 0%, #3d3224 100%);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #f5e6d3;
+}
+
+/* Focus visible styling */
+:focus-visible {
+  outline: 2px solid #d4af37;
+  outline-offset: 2px;
+}
+
+/* Book page texture */
+.book-page {
+  background:
+    linear-gradient(135deg, #f5f0e6 0%, #e8e0d0 100%);
+  position: relative;
+}
+
+.book-page::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(90deg, rgba(139, 115, 85, 0.15) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Wood grain effect */
+.wood-grain {
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px);
+}
+
+/* Gold shimmer animation */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.3) 50%,
+      transparent 100%);
+  background-size: 200% 100%;
+  animation: goldShimmer 3s ease-in-out infinite;
+}
+
+/* Book hover lift effect */
+.book-hover-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.book-hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    -8px 12px 25px rgba(0, 0, 0, 0.5),
+    inset 2px 0 5px rgba(255, 255, 255, 0.1);
+}
+
+/* Shelf shadow */
+.shelf-shadow {
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+/* Candlelight flicker effect */
+@keyframes candleFlicker {
+
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0.98;
+  }
+}
+
+.candlelight {
+  animation: candleFlicker 4s ease-in-out infinite;
+}
+
+/* Paper texture overlay */
+.paper-texture {
+  position: relative;
+}
+
+.paper-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .library-bg {
+    background-attachment: scroll;
+  }
+
+  .book-spine {
+    transform: rotateY(-3deg) scale(0.9);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .dust-particle {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .library-bg {
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
