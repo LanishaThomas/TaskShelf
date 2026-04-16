@@ -52,12 +52,13 @@ export function TaskBookSpine({ task, onClick, index }: TaskBookSpineProps) {
       <div
         className="relative w-14 sm:w-16 md:w-20 h-48 sm:h-56 md:h-64 rounded-sm overflow-hidden"
         style={{
-          background: `linear-gradient(90deg, ${color.dark} 0%, ${color.bg} 22%, ${color.bg} 78%, ${color.spine} 100%)`,
+          background: isCompleted
+            ? 'linear-gradient(90deg, #3a3a3a 0%, #5a5a5a 22%, #5a5a5a 78%, #404040 100%)'
+            : `linear-gradient(90deg, ${color.dark} 0%, ${color.bg} 22%, ${color.bg} 78%, ${color.spine} 100%)`,
           boxShadow: `-4px 4px 14px rgba(0,0,0,0.55), inset 2px 0 4px rgba(255,255,255,0.1), inset -2px 0 4px rgba(0,0,0,0.3)`,
           transform: 'rotateY(-5deg)',
           transformStyle: 'preserve-3d',
-          // Completed books: slightly desaturated + dimmed
-          filter: isCompleted ? 'brightness(0.78) saturate(0.65)' : 'none',
+          filter: 'none',
         }}
       >
         {/* Decorative bands */}

@@ -72,6 +72,7 @@ function TaskContent() {
         {/* Task Shelf */}
         <TaskShelf
           tasks={filteredTasks}
+          filter={state.filter}
           onSelectTask={(id) => dispatch({ type: 'SELECT_TASK', payload: id })}
           onAddNew={handleAddNew}
           searchQuery={state.searchQuery}

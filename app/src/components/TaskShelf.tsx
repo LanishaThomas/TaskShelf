@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TaskBookSpine } from './TaskBookSpine';
 import { SortBar } from './SortBar';
 import { ShelfDecoration } from './ShelfDecoration';
-import type { Task, SortConfig } from '@/types';
+import type { Task, SortConfig, FilterType } from '@/types';
 import { PRIORITY_WEIGHT } from '@/types';
 import { Plus, CheckSquare, Loader2, ServerCrash, WifiOff, RefreshCw } from 'lucide-react';
 
 interface TaskShelfProps {
   tasks: Task[];
+  filter: FilterType;
   onSelectTask: (id: string) => void;
   onAddNew: () => void;
   searchQuery: string;
@@ -55,6 +56,7 @@ function sortTasks(tasks: Task[], config: SortConfig): Task[] {
 
 export function TaskShelf({
   tasks,
+  filter,
   onSelectTask,
   onAddNew,
   searchQuery,
@@ -64,13 +66,20 @@ export function TaskShelf({
 }: TaskShelfProps) {
   const [sortConfig, setSortConfig] = useState<SortConfig>({ by: 'createdAt', order: 'desc' });
 
+  // 0) Hard guard — enforce filter even if parent passes wrong tasks
+  const guardedTasks = tasks.filter((t) => {
+    if (filter === 'pending') return t.status === 'Pending';
+    if (filter === 'completed') return t.status === 'Completed';
+    return true;
+  });
+
   // 1) Search filter
   const filteredTasks = searchQuery
-    ? tasks.filter((t) => {
+    ? guardedTasks.filter((t) => {
         const q = searchQuery.toLowerCase();
         return t.title.toLowerCase().includes(q) || (t.description?.toLowerCase().includes(q) ?? false);
       })
-    : tasks;
+    : guardedTasks;
 
   // 2) Sort
   const sortedTasks = sortTasks(filteredTasks, sortConfig);
@@ -157,8 +166,8 @@ export function TaskShelf({
           <div>
             <h2 className="font-heading text-2xl font-bold text-[#faf0dd]">{filterLabel}</h2>
             <p className="text-sm text-[#a08c6a] font-body">
-              {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
-              {searchQuery && filteredTasks.length !== tasks.length && (
+              {guardedTasks.length} {guardedTasks.length === 1 ? 'task' : 'tasks'}
+              {searchQuery && filteredTasks.length !== guardedTasks.length && (
                 <span className="text-amber-400/80"> · {filteredTasks.length} matching</span>
               )}
             </p>

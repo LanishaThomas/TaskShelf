@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowUpDown, CalendarClock, CalendarCheck, Zap, Clock } from 'lucide-react';
+import { ArrowUpDown, CalendarClock, Zap, Clock } from 'lucide-react';
 import type { SortConfig, SortBy } from '@/types';
 
 interface SortBarProps {
@@ -36,13 +36,6 @@ const SORT_OPTIONS: SortOption[] = [
     icon: Zap,
     tooltip: 'Sort by priority (High → Medium → Low)',
     defaultOrder: 'asc',
-  },
-  {
-    by: 'updatedAt',
-    label: 'Completed',
-    icon: CalendarCheck,
-    tooltip: 'Sort by most recently updated/completed',
-    defaultOrder: 'desc',
   },
 ];
 

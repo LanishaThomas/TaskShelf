@@ -103,7 +103,7 @@ export function TaskCard({ task, onClose, onEdit }: TaskCardProps) {
               <div className="mb-6 flex flex-wrap gap-2">
                 <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-ui font-medium ${
                   isCompleted
-                    ? 'bg-green-100 text-green-800 border border-green-300'
+                    ? 'bg-slate-200 text-slate-600 border border-slate-400'
                     : 'bg-amber-100 text-amber-800 border border-amber-300'
                 }`}>
                   {isCompleted ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
@@ -183,7 +183,7 @@ export function TaskCard({ task, onClose, onEdit }: TaskCardProps) {
                   disabled={toggling}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-ui text-sm font-medium transition-all ${
                     isCompleted
-                      ? 'bg-amber-100 text-amber-800 border border-amber-300 hover:bg-amber-200'
+                      ? 'bg-slate-200 text-slate-600 border border-slate-400 hover:bg-slate-300'
                       : 'bg-green-100 text-green-800 border border-green-300 hover:bg-green-200'
                   } disabled:opacity-60`}
                 >
